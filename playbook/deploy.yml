@@ -1,0 +1,34 @@
+---
+- name: Deploy production
+  hosts: all
+  gather_facts: yes
+  become: yes
+  remote_user: root
+
+  tasks:
+
+    - name: Log into private registry and force re-authorization
+      docker_login:
+        registry: registry.gitlab.com
+        username: joduplessis
+        password: "{{ lookup('env','PASSWORD') }}"
+        reauthorize: yes
+
+    - name: Pull default Docker image
+      docker_image:
+        name: "{{ lookup('env','DOCKER_IMAGE') }}"
+        source: pull
+
+    - name: Stop a container
+      docker_container:
+        name: websocket
+        state: stopped
+
+    - name: Create default containers
+      docker_container:
+        name: websocket
+        image: "{{ lookup('env','DOCKER_IMAGE') }}"
+        detach: yes
+        ports:
+          - "{{ lookup('env','PORT') }}:{{ lookup('env','PORT') }}"
+        state: started

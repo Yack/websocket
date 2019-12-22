@@ -1,0 +1,35 @@
+{
+  "name": "weekday-websocket",
+  "version": "1.0.0",
+  "description": "Weekday Web Socket server",
+  "main": "index.js",
+  "scripts": {
+    "build": "babel src -d build",
+    "start": "node ./build/index.js",
+    "dev": "npm run nodemon --exec npm run babel-node -- ./src/index.js",
+    "babel-node": "babel-node",
+    "nodemon": "nodemon",
+    "babel": "babel"
+  },
+  "author": "Jo du Plessis",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/cli": "^7.6.0",
+    "@babel/core": "^7.2.2",
+    "@babel/node": "^7.2.2",
+    "@babel/plugin-proposal-class-properties": "^7.3.0",
+    "@babel/preset-env": "^7.3.1",
+    "@babel/runtime": "^7.6.0",
+    "amqplib": "^0.5.5",
+    "babel-polyfill": "^6.26.0",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.1.0",
+    "express": "^4.17.1",
+    "http": "0.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "nodemon": "^1.19.3",
+    "socket.io": "^2.2.0",
+    "socket.io-redis": "^5.2.0"
+  }
+}

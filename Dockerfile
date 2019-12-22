@@ -1,0 +1,28 @@
+FROM node:10
+MAINTAINER Jo du Plessis <jo@joduplessis.com>
+
+ARG PORT
+ARG REDIS_HOST
+ARG REDIS_PORT
+ARG REDIS_PASSWORD
+ARG SECRET
+
+ENV PORT=$PORT
+ENV REDIS_HOST=$REDIS_HOST
+ENV REDIS_PORT=$REDIS_PORT
+ENV REDIS_PASSWORD=$REDIS_PASSWORD
+ENV SECRET=$SECRET
+
+ENV NODE_ENV=production
+
+EXPOSE $PORT
+EXPOSE $REDIS_PORT
+
+WORKDIR /var/www/websocket
+
+COPY . /var/www/websocket
+
+RUN npm i
+RUN npm run build
+
+CMD ["npm", "run", "start"]
